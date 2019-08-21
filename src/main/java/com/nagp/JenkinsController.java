@@ -20,7 +20,7 @@ public class JenkinsController {
 	public String sayHello(Model model){
 		model.addAttribute("welcome", "Jenkins Workflow");
 		
-		return "jenkins";
+		return "jenkin";
 	}
 	
 }
