@@ -29,7 +29,7 @@
 		<div class="hero-unit">
 			<h1 align="center">${welcome}</h1>
 			<img height="100%" width="100%"
-				src="assets/images/jenkinsWorkflow.png"
+				src="assets/images/dockerWorkflow.jpg"
 				alt="Docker" />
 		</div>
 	</div>
