@@ -11,10 +11,9 @@ public class DockerController {
 	 * @param model
 	 * @return JSP view
 	 */
-	@RequestMapping(value="/jenkins", method = RequestMethod.GET)
-	public String sayHello(Model model){
-		model.addAttribute("welcome", "Jenkins Workflow");
-		
-		return "jenkins";
+	@RequestMapping(value="/docker", method = RequestMethod.GET)
+	public String sayHelloToDocker(Model model){
+		model.addAttribute("welcome", "Docker");		
+		return "docker";
 	}
 }

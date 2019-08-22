@@ -11,15 +11,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class JenkinsController {
-	
 	/**
 	 * @param model
 	 * @return JSP view
 	 */
 	@RequestMapping(value="/jenkins", method = RequestMethod.GET)
-	public String sayHello(Model model){
+	public String sayHelloToJenkins(Model model){
 		model.addAttribute("welcome", "Jenkins Workflow");
-		
 		return "jenkins";
 	}
 	
