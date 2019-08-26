@@ -19,7 +19,7 @@
 	<div class="navbar navbar-fixed-top navbar-inverse">
 		<div class="navbar-inner">
 			<div class="container">
-				<a class="brand" href="/"> Home </a>
+				<a class="brand" href="/SpringDockerJenkins"> Home </a>
 				<ul class="nav">
 				</ul>
 			</div>
