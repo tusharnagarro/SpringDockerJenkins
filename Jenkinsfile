@@ -128,7 +128,9 @@ pipeline {
                  withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'PASSWORD', usernameVariable: 'USER')]) {
                     if(isUnix()){
                         sh """docker login -u='$USER' -p='$PASSWORD' """
-                        sh 'docker push tusharkumar886/springdockerjenkins:latest'                    
+                        docker.withRegistry('', 'docker') {                        
+                          sh returnStdout: true, script: 'docker push tusharkumar886/springdockerjenkins:latest'
+                        }                    
                     } else {
                         bat "docker login -u $USER -p $PASSWORD"
                         docker.withRegistry('', 'docker') {
@@ -145,15 +147,23 @@ pipeline {
          steps {
              script {
                  if(isUnix()){
-                    sh returnStdout: true, script: '/bin/docker container stop springdockerjenkins'
+                    sh '''
+                      ContainerId=$(docker ps | grep 8082 | cut -d " " -f 1)
+                      if [ ! -z $ContainerId]
+                      then
+                          docker stop $ContainerId
+                          docker rm -f $ContainerId
+                      fi
+                    ''' 
+                    // sh returnStdout: true, script: '/bin/docker container stop springdockerjenkins'
                     sh returnStdout: true, script: '/bin/docker run --name springdockerjenkins --publish 8082:8080 tusharkumar886/springdockerjenkins:latest'
                  } else {
                      bat '''
-                        for /F "tokens=1" %%a in (\'docker ps -q --filter "name=springdockerjenkins"\') DO (set ContainerName=%%a)
-                        if defined ContainerName (cmd /c docker rm -f %ContainerName%)
+                        for /F "tokens=1" %%a in (\'docker ps -q --filter "name=springdockerjenkins"\') DO (set ContainerId=%%a)
+                        if [%ContainerId%] neq [] (cmd /c docker rm -f %ContainerId%)
                     '''
                     bat 'docker run --name springdockerjenkins -d -p 8082:8080 tusharkumar886/springdockerjenkins:latest'
-                    echo  "\u2600 ACCESS DEV ENVIRONMENT HERE: http://localhost:8082/SpringDockerJenkins/"
+                    echo  " ACCESS DEV ENVIRONMENT HERE: http://localhost:8082/SpringDockerJenkins/"
                  }
              }
          }
