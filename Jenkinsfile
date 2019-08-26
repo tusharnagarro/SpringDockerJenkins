@@ -8,6 +8,7 @@ pipeline {
   }
 
   triggers {
+    //will trigger build after 2 min between 9 AM-6 PM from Mon-Friday for every git push
     pollSCM('H/2 9-18 * * 1-5')
   }
 
@@ -163,7 +164,7 @@ pipeline {
                         if [%ContainerId%] neq [] (cmd /c docker rm -f %ContainerId%)
                     '''
                     bat 'docker run --name springdockerjenkins -d -p 8082:8080 tusharkumar886/springdockerjenkins:latest'
-                    echo  " ACCESS DEV ENVIRONMENT HERE: http://localhost:8082/SpringDockerJenkins/"
+                    echo  " ACCESS ENVIRONMENT HERE: http://localhost:8082/SpringDockerJenkins/"
                  }
              }
          }
