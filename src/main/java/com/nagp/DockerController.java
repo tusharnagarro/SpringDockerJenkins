@@ -17,7 +17,7 @@ public class DockerController {
 	 */
 	@RequestMapping(value="/docker", method = RequestMethod.GET)
 	public String sayHelloToDocker(Model model){
-		model.addAttribute("welcome", "Docker");		
+		model.addAttribute("welcome", "Prod");		
 		return "docker";
 	}
 }
