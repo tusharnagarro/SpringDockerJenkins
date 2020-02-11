@@ -17,7 +17,7 @@ public class JenkinsController {
 	 */
 	@RequestMapping(value="/jenkins", method = RequestMethod.GET)
 	public String sayHelloToJenkins(Model model){
-		model.addAttribute("welcome", "Jenkins Workflow");
+		model.addAttribute("welcome", "Dev");
 		return "jenkins";
 	}
 	
